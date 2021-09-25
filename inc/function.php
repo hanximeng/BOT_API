@@ -1,0 +1,85 @@
+<?php
+/*
+* 机器人函数库
+* 已有函数：Curl、随机IP、机器人API接口
+* 寒曦朦 2021/02/09 Update
+*/
+
+//Curl函数
+function curl($url,$guise='',$UA='Mozilla/5.0 (Windows NT 6.1; rv:21.0) Gecko/20100101 Firefox/21.0') {
+	$curl = curl_init();
+	curl_setopt($curl, CURLOPT_URL, $url);
+	curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+	curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2);
+	curl_setopt($curl, CURLOPT_USERAGENT, $UA);
+	curl_setopt($curl, CURLOPT_HTTPHEADER, array('X-FORWARDED-FOR:'.Rand_IP(), 'CLIENT-IP:'.Rand_IP()));
+	curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 0);
+	curl_setopt($curl, CURLOPT_AUTOREFERER, 0);
+	curl_setopt($curl, CURLOPT_HTTPGET, 0);
+	if(!empty($guise)){
+		curl_setopt($curl, CURLOPT_REFERER, $guise);
+	}
+	curl_setopt($curl, CURLOPT_TIMEOUT, 0);
+	curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 0);	curl_setopt($curl, CURLOPT_CONNECTTIMEOUT_MS, 0);
+	curl_setopt($curl, CURLOPT_HEADER, 0);
+	curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+	$tmpInfo = curl_exec($curl);
+	return $tmpInfo;
+}
+
+//随机IP
+function Rand_IP(){
+
+	$ip2id = round(rand(600000, 2550000) / 10000);
+	$ip3id = round(rand(600000, 2550000) / 10000);
+	$ip4id = round(rand(600000, 2550000) / 10000);
+	$arr_1 = array('218','218','66','66','218','218','60','60','202','204','66','66','66','59','61','60','222','221','66','59','60','60','66','218','218','62','63','64','66','66','122','211');
+	$randarr= mt_rand(0,count($arr_1)-1);
+	$ip1id = $arr_1[$randarr];
+	return $ip1id.'.'.$ip2id.'.'.$ip3id.'.'.$ip4id;
+}
+
+//调用API
+function http_post_json($url,$jsonStr){
+
+	if($GLOBALS['BOT_Sleep'] == 'true'){
+		$code=file_get_contents('code.txt');
+		$code=$code+3;
+		file_put_contents('code.txt',$code);
+		if($code<0 or $code>60 or empty($code)){$code=3;}
+		sleep($code);//延时避免风控
+	}
+	$url = $GLOBALS['BOT_Server'].'/'.$url.'?access_token='.$GLOBALS['BOT_Token'];
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_POST, 1);
+	curl_setopt($ch, CURLOPT_URL, $url);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonStr);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+	curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+			'Content-Type: application/json; charset=utf-8'
+		)
+	);
+	$response = curl_exec($ch);
+	curl_close($ch);
+
+	if($GLOBALS['BOT_Sleep'] == 'true'){
+		$code=file_get_contents('code.txt');
+		$code=$code-3;
+		file_put_contents('code.txt',$code);
+	}
+	return $response;
+}
+
+//POST提交
+function Curl_Post($remote_server, $post_string) {
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_URL, $remote_server);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $post_string);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_USERAGENT, 'HxmBot beta');
+	$data = curl_exec($ch);
+	curl_close($ch);
+
+	return $data;
+}
+
