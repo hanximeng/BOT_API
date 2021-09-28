@@ -83,3 +83,99 @@ function Curl_Post($remote_server, $post_string) {
 	return $data;
 }
 
+//用于间隔多久执行一次的函数
+function BOT_Time_Inr($Name,$Num){
+	//获取时间
+	$Time=date('Y-m-d H:i',filemtime('./Data/Cron/Cron_'.$Name.'.log'));
+	
+	if(date('Y-m-d H:i') !== $Time){
+
+	$Time=(strtotime(date('Y-m-d H:i'))-strtotime($Time))/60;
+		if($Time >= $Num){
+
+			//存入日志
+			$Log='任务名：'.$Name.'；执行时间：'.date('Y-m-d H:i')."\n";
+			file_put_contents('./Data/Cron/Cron_'.$Name.'.log',$Log);
+
+		//输出结果
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+}
+
+//用于每天几点执行一次的函数
+function BOT_Time_Day($Name,$Num){
+	//获取时间
+	$Time=date('Y-m-d H:i',filemtime('./Data/Cron/Cron_'.$Name.'.log'));
+	
+	if(date('Y-m-d H:i') !== $Time){
+		if(is_array($Num)){
+			foreach ($Num as $value) {
+				if(date('H:i') == $value){
+					//存入日志
+					$Log='任务名：'.$Name.'；执行时间：'.date('Y-m-d H:i')."\n";
+					file_put_contents('./Data/Cron/Cron_'.$Name.'.log',$Log);
+
+					return true;
+				}
+			}
+		}else{
+			if(date('H:i') == $Num){
+
+				//存入日志
+				$Log='任务名：'.$Name.'；执行时间：'.date('Y-m-d H:i')."\n";
+				file_put_contents('./Data/Cron/Cron_'.$Name.'.log',$Log);
+
+			//输出结果
+				return true;
+			}else{
+				return false;
+			}
+		}
+	}
+}
+
+//用于某一天的几点执行的函数
+function BOT_Time_One($Name,$Num){
+	//获取时间
+	$Time=date('Y-m-d H:i',filemtime('./Data/Cron/Cron_'.$Name.'.log'));
+	
+	if(date('Y-m-d H:i') !== $Time){
+
+		if(date('Y-m-d H:i') == $Num){
+
+			//存入日志
+			$Log='任务名：'.$Name.'；执行时间：'.date('Y-m-d H:i')."\n";
+			file_put_contents('./Data/Cron/Cron_'.$Name.'.log',$Log);
+
+		//输出结果
+			return true;
+		}else{
+			return false;
+		}
+	}
+}
+
+//用于整点执行的函数
+function BOT_Time_Hour($Name,$Num){
+	//获取时间
+	$Time=date('Y-m-d H:i',filemtime('./Data/Cron/Cron_'.$Name.'.log'));
+	
+	if(date('Y-m-d H:i') !== $Time){
+
+		if(date('i') == $Num){
+
+			//存入日志
+			$Log='任务名：'.$Name.'；执行时间：'.date('Y-m-d H:i')."\n";
+			file_put_contents('./Data/Cron/Cron_'.$Name.'.log',$Log);
+
+		//输出结果
+			return true;
+		}else{
+			return false;
+		}
+	}
+}
