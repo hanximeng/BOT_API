@@ -22,11 +22,12 @@ $Data=json_decode($content,true);
 //创建日志文件夹用来存放群组及私聊消息
 mkdir('./Data');
 mkdir('./Data/Log');
-mkdir('./Data/Log/Group');
+mkdir('./Data/Cron/');
 mkdir('./Data/Log/User');
 mkdir('./Data/Log/Other');
-mkdir('./Data/Log/Group/'.date('Y-m-d',time()));
+mkdir('./Data/Log/Group');
 mkdir('./Data/Log/User/'.date('Y-m-d',time()));
+mkdir('./Data/Log/Group/'.date('Y-m-d',time()));
 
 //判断类型并存入对应日志目录
 if(!empty($Data['group_id'])){
@@ -48,4 +49,5 @@ foreach($list as $file){
 	$file=explode('/',$file)['2'];
 	require './plugins/'.$file;
 }
+
 ?>
