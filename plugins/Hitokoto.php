@@ -7,7 +7,7 @@
 
 if($Data['message']=='一言'){
 	//此处调用的Hitokoto.cn的API服务，可自行更换
-	$Json=curl('http://v1.hitokoto.cn');
+	$Json=curl('https://v1.hitokoto.cn');
 	$Hitokoto=json_decode($Json,true);
 
 	//判断是否存在group_id，若不存在则为私聊
