@@ -1,5 +1,28 @@
-# BOT_API
-用于对接go-cqhttp的PHP机器人框架
+<p align="center">
+    <img src="https://bot.hanximeng.com/public/images/avatar.png" width="200" height="200" alt="hanximeng-botapi">
+</p>
 
-## 计划任务
-本功能依赖于go-cqhttp的心跳事件，请勿关闭
+<div align="center">
+
+# BOT_API
+
+_👻 基于 [PHP](https://www.php.net/) 以及 [go-cqhttp](https://github.com/Mrs4s/go-cqhttp/) 的 BOT 服务 👻_  
+
+
+</div>
+
+## **兼容性**
+* 仅在 PHP 7.2 以上进行过测试。
+
+## **插件列表**
+
+* 百度百科
+* 点歌（网易音乐、QQ音乐、咪咕音乐、哔哩哔哩音乐）
+* 群打卡 or 群签到
+* 一言（[Hitokoto](https://hitokoto.cn/)）
+* 毒鸡汤
+* 葫芦侠三楼图片
+* 帮我选
+
+## **注意事项**
+* 计划任务功能依赖于go-cqhttp的心跳事件，请勿关闭！
