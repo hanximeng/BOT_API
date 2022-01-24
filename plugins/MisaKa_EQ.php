@@ -5,9 +5,10 @@
 * @Version：Beta_0.0.1
 */
 
-//创建插件数据目录用于存储配置
-mkdir('./Data/Plugins/MisaKa_EQ/');
-    
+//判断是否存在插件数据目录
+if(!file_exists('./Data/Plugins/MisaKa_EQ/')){
+	mkdir('./Data/Plugins/MisaKa_EQ/');
+}
 //开启插件
 if($Data['message']=='开启地震通报'){
 	//仅允许群主或管理员进行操作
@@ -53,10 +54,6 @@ if($Data['message']=='关闭地震通报'){
 
 //计时任务 每分钟执行一次
 if(BOT_Time_Inr('地震通报','1') == true){
-//判断是否存在插件数据目录
-	if(!file_exists('./Data/Plugins/地震通报/')){
-		mkdir('./Data/Plugins/地震通报/');
-	}
 
 //获取数据
 	$Json=curl("http://www.ceic.ac.cn/ajax/speedsearch?num=1");
@@ -64,7 +61,7 @@ if(BOT_Time_Inr('地震通报','1') == true){
 	$Data=json_decode($Json,true);
 	
 //获取已存旧数据时间
-	$Log=file_get_contents('./Data/Plugins/地震通报/Log.log');
+	$Log=file_get_contents('./Data/Plugins/MisaKa_EQ/Log.log');
 	
 //替换掉YYYY-MM-DD
 	$O_TIME=str_replace(date("Y-m-d").' ','',$Data['shuju'][0]['O_TIME']);
@@ -73,7 +70,7 @@ if(BOT_Time_Inr('地震通报','1') == true){
 	if(!empty($Data['shuju'][0]['LOCATION_C']) and $Log !== $Data['shuju'][0]['O_TIME']){
 		$Text='====== 地震速报 ======\n\n地点：'.$Data['shuju'][0]['LOCATION_C'].'\n震级：'.$Data['shuju'][0]['M'].'\n经度：'.$Data['shuju'][0]['EPI_LON'].'\n纬度：'.$Data['shuju'][0]['EPI_LAT'].'\n深度：'.$Data['shuju'][0]['EPI_DEPTH'].'KM\n时间：'.$O_TIME.'\n\n数据来源：中国地震台网';
 		//保存Log
-		file_put_contents('./Data/Plugins/地震通报/Log.log',$Data['shuju'][0]['O_TIME']);
+		file_put_contents('./Data/Plugins/MisaKa_EQ/Log.log',$Data['shuju'][0]['O_TIME']);
 		//推送至QQ群列表
 		$Group=file_get_contents('./Data/Plugins/MisaKa_EQ/Group.json');
 		$Group=json_decode($Group,true);
