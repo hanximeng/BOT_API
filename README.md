@@ -26,6 +26,7 @@ _👻 基于 [PHP](https://www.php.net/) 以及 [go-cqhttp](https://github.com/M
 * 毒鸡汤
 * 葫芦侠三楼图片
 * 帮我选
+* 地震通报
 
 ## **注意事项**
 * 计划任务功能依赖于go-cqhttp的心跳事件，请勿关闭！
