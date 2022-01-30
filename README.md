@@ -13,6 +13,7 @@ _👻 基于 [PHP](https://www.php.net/) 以及 [go-cqhttp](https://github.com/M
 <p align="center">
   <a href="https://github.com/hanximeng/BOT_API/archive/refs/heads/main.zip">下载</a>
 </p>
+
 ## **兼容性**
 * 仅在 PHP 7.2 以上进行过测试。
 
