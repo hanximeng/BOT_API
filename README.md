@@ -30,3 +30,4 @@ _👻 基于 [PHP](https://www.php.net/) 以及 [go-cqhttp](https://github.com/M
 
 ## **注意事项**
 * 计划任务功能依赖于go-cqhttp的心跳事件，请勿关闭！
+* 延时功能需编辑./inc/config.php 将 $BOT_Sleep 的值改为 true ，该功能可有效防止被风控，但会导致消息延迟收到，请根据自身需求判断是否启用。
