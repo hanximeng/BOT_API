@@ -29,7 +29,6 @@ function curl($url,$guise='',$UA='Mozilla/5.0 (Windows NT 6.1; rv:21.0) Gecko/20
 
 //随机IP
 function Rand_IP(){
-
 	$ip2id = round(rand(600000, 2550000) / 10000);
 	$ip3id = round(rand(600000, 2550000) / 10000);
 	$ip4id = round(rand(600000, 2550000) / 10000);
@@ -41,7 +40,9 @@ function Rand_IP(){
 
 //调用API
 function http_post_json($url,$jsonStr){
-
+	//用于统计消息发送的总数
+	file_put_contents('./Data/num.txt',file_get_contents('./Data/num.txt')+1);
+	//判断延时策略是否开启
 	if($GLOBALS['BOT_Sleep'] == 'true'){
 		$code=file_get_contents('code.txt');
 		$code=$code+3;
@@ -49,6 +50,7 @@ function http_post_json($url,$jsonStr){
 		if($code<0 or $code>60 or empty($code)){$code=3;}
 		sleep($code);//延时避免风控
 	}
+	//提交至go-cqhttp
 	$url = $GLOBALS['BOT_Server'].'/'.$url.'?access_token='.$GLOBALS['BOT_Token'];
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_POST, 1);
@@ -61,7 +63,7 @@ function http_post_json($url,$jsonStr){
 	);
 	$response = curl_exec($ch);
 	curl_close($ch);
-
+	//判断延时策略是否开启
 	if($GLOBALS['BOT_Sleep'] == 'true'){
 		$code=file_get_contents('code.txt');
 		$code=$code-3;
@@ -79,7 +81,6 @@ function Curl_Post($remote_server, $post_string) {
 	curl_setopt($ch, CURLOPT_USERAGENT, 'HxmBot beta');
 	$data = curl_exec($ch);
 	curl_close($ch);
-
 	return $data;
 }
 
@@ -87,16 +88,12 @@ function Curl_Post($remote_server, $post_string) {
 function BOT_Time_Inr($Name,$Num){
 	//获取时间
 	$Time=date('Y-m-d H:i',filemtime('./Data/Cron/Cron_'.$Name.'.log'));
-	
 	if(date('Y-m-d H:i') !== $Time){
-
 	$Time=(strtotime(date('Y-m-d H:i'))-strtotime($Time))/60;
 		if($Time >= $Num){
-
 			//存入日志
 			$Log='任务名：'.$Name.'；执行时间：'.date('Y-m-d H:i')."\n";
 			file_put_contents('./Data/Cron/Cron_'.$Name.'.log',$Log);
-
 		//输出结果
 			return true;
 		}else{
@@ -110,7 +107,6 @@ function BOT_Time_Inr($Name,$Num){
 function BOT_Time_Day($Name,$Num){
 	//获取时间
 	$Time=date('Y-m-d H:i',filemtime('./Data/Cron/Cron_'.$Name.'.log'));
-	
 	if(date('Y-m-d H:i') !== $Time){
 		if(is_array($Num)){
 			foreach ($Num as $value) {
@@ -118,17 +114,14 @@ function BOT_Time_Day($Name,$Num){
 					//存入日志
 					$Log='任务名：'.$Name.'；执行时间：'.date('Y-m-d H:i')."\n";
 					file_put_contents('./Data/Cron/Cron_'.$Name.'.log',$Log);
-
 					return true;
 				}
 			}
 		}else{
 			if(date('H:i') == $Num){
-
 				//存入日志
 				$Log='任务名：'.$Name.'；执行时间：'.date('Y-m-d H:i')."\n";
 				file_put_contents('./Data/Cron/Cron_'.$Name.'.log',$Log);
-
 			//输出结果
 				return true;
 			}else{
@@ -142,15 +135,11 @@ function BOT_Time_Day($Name,$Num){
 function BOT_Time_One($Name,$Num){
 	//获取时间
 	$Time=date('Y-m-d H:i',filemtime('./Data/Cron/Cron_'.$Name.'.log'));
-	
 	if(date('Y-m-d H:i') !== $Time){
-
 		if(date('Y-m-d H:i') == $Num){
-
 			//存入日志
 			$Log='任务名：'.$Name.'；执行时间：'.date('Y-m-d H:i')."\n";
 			file_put_contents('./Data/Cron/Cron_'.$Name.'.log',$Log);
-
 		//输出结果
 			return true;
 		}else{
@@ -163,15 +152,11 @@ function BOT_Time_One($Name,$Num){
 function BOT_Time_Hour($Name,$Num){
 	//获取时间
 	$Time=date('Y-m-d H:i',filemtime('./Data/Cron/Cron_'.$Name.'.log'));
-	
 	if(date('Y-m-d H:i') !== $Time){
-
 		if(date('i') == $Num){
-
 			//存入日志
 			$Log='任务名：'.$Name.'；执行时间：'.date('Y-m-d H:i')."\n";
 			file_put_contents('./Data/Cron/Cron_'.$Name.'.log',$Log);
-
 		//输出结果
 			return true;
 		}else{

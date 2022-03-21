@@ -13,7 +13,10 @@ $content = file_get_contents('php://input');
 
 //空参数或直接访问时的提示
 if(empty($content)){
-	exit('Hello World!');
+	//方便后期添加WEB页面
+	include './themes/index.php';
+	//如非机器人调用则停止与此避免影响
+	die();
 }
 
 header('content-type:application/json');
