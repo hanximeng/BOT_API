@@ -12,6 +12,7 @@ _👻 基于 [PHP](https://www.php.net/) 以及 [go-cqhttp](https://github.com/M
 </div>
 <p align="center">
   <a href="https://github.com/hanximeng/BOT_API/archive/refs/heads/main.zip">下载</a>
+  <a href="https://www.bilibili.com/video/bv1V34y1x7fR">视频教程</a>
 </p>
 
 ## **兼容性**
