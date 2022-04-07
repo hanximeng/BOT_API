@@ -7,3 +7,6 @@ $BOT_Token='';
 
 //是否开启延时策略，开启：true；关闭：false
 $BOT_Sleep='false';
+
+//BOT管理员QQ号
+$Admin_QQ='1017959770';
