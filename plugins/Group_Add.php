@@ -5,7 +5,7 @@
 * @Version：Beta_0.0.1
 */
 
-if($Data['request_type'] == 'group'){
+if($Data['request_type'] == 'group' and $Data['sub_type'] == 'invite'){
 	//此处判断是否是来自机器人管理员的邀请
 	if($Data['user_id'] == $Admin_QQ){
 		//判断是否存在flag，若不存在则不是邀请入群
