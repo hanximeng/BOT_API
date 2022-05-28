@@ -18,7 +18,7 @@ if(strpos($Data['message'],"哔哩点歌 ")!==false){
 		if(empty($Bili_Music['reduxAsyncConnect']['audioInfo']['urls']['0'])){
 			$Text='哔哩点歌暂时没有 '.$Info[1].' 这首歌的播放地址，请尝试更换其他引擎或关键词！';
 		}else{
-			$Text='[CQ:music,type=custom,audio='.$Bili_Music['reduxAsyncConnect']['audioInfo']['urls']['0'].',title='.$Bili_Music['reduxAsyncConnect']['audioInfo']['title'].',content='.$Bili_Music['reduxAsyncConnect']['audioInfo']['author'].',image='.$Bili_Music['reduxAsyncConnect']['audioInfo']['cover_url'].',url=https://bot.hanximeng.com]';
+			$Text='[CQ:music,type=custom,audio='.$Bili_Music['reduxAsyncConnect']['audioInfo']['urls']['0'].',title='.$Bili_Music['reduxAsyncConnect']['audioInfo']['title'].',content='.$Bili_Music['reduxAsyncConnect']['audioInfo']['author'].',image='.$Bili_Music['reduxAsyncConnect']['audioInfo']['cover_url'].',url=https://bot.hanximeng.com,subtype=bilibili]';
 		}
 		//判断是否存在group_id，若不存在则为私聊
 		if(!empty($Data['group_id'])){
