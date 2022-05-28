@@ -13,9 +13,9 @@ if(strpos($Data['message'],"咪咕点歌 ")!==false){
 		$Migu['musics']['0']['mp3']=str_replace('https://','http://',$Migu['musics']['0']['mp3']);
 		
 		if(empty($Migu['musics']['0']['mp3'])){
-			$Text='咪咕音乐暂时没有 '.$Info[1].' 这首歌的播放地址，请尝试更换其他引擎或关键词！';
+			$Text='咪咕音乐暂时没有 '.$Info[1].' 或需要VIP，请尝试更换其他引擎或关键词！';
 		}else{
-			$Text='[CQ:music,type=custom,audio='.$Migu['musics']['0']['mp3'].',title='.$Migu['musics']['0']['songName'].',content='.$Migu['musics']['0']['artist'].',image='.$Migu['musics']['0']['cover'].',url=https://bot.hanximeng.com]';
+			$Text='[CQ:music,type=custom,audio='.$Migu['musics']['0']['mp3'].',title='.$Migu['musics']['0']['songName'].',content='.$Migu['musics']['0']['artist'].',image='.$Migu['musics']['0']['cover'].',url=https://bot.hanximeng.com,subtype=migu]';
 		}
 		//判断是否存在group_id，若不存在则为私聊
 		if(!empty($Data['group_id'])){
