@@ -1,6 +1,8 @@
 <?php
 /*
-* 酷安图片
+* @Plugin Name：百度百科
+* @Author：Hanximeng
+* @Version：Beta_0.0.1
 */
 
 if(strpos($Data['message'],"！百科 ")!==false) {
